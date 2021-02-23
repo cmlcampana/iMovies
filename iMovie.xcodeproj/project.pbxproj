@@ -12,6 +12,9 @@
 		B1BDFBEA25DEE6F300A298C1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDFBE925DEE6F300A298C1 /* ViewController.swift */; };
 		B1BDFBEF25DEE6F500A298C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1BDFBEE25DEE6F500A298C1 /* Assets.xcassets */; };
 		B1BDFBF225DEE6F500A298C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1BDFBF025DEE6F500A298C1 /* LaunchScreen.storyboard */; };
+		B1C9625725E52F4A00C5E02D /* MovieDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9625425E52F4A00C5E02D /* MovieDetailCoordinator.swift */; };
+		B1C9625825E52F4A00C5E02D /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9625525E52F4A00C5E02D /* MovieDetailViewController.swift */; };
+		B1C9625925E52F4A00C5E02D /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9625625E52F4A00C5E02D /* MovieDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		B1BDFBEE25DEE6F500A298C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B1BDFBF125DEE6F500A298C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B1BDFBF325DEE6F500A298C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1C9625425E52F4A00C5E02D /* MovieDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieDetailCoordinator.swift; path = iMovie/MovieDetailCoordinator.swift; sourceTree = SOURCE_ROOT; };
+		B1C9625525E52F4A00C5E02D /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieDetailViewController.swift; path = iMovie/MovieDetailViewController.swift; sourceTree = SOURCE_ROOT; };
+		B1C9625625E52F4A00C5E02D /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieDetailViewModel.swift; path = iMovie/MovieDetailViewModel.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +114,9 @@
 		B1BDFC0325DEEA9300A298C1 /* MovieDetail */ = {
 			isa = PBXGroup;
 			children = (
+				B1C9625425E52F4A00C5E02D /* MovieDetailCoordinator.swift */,
+				B1C9625525E52F4A00C5E02D /* MovieDetailViewController.swift */,
+				B1C9625625E52F4A00C5E02D /* MovieDetailViewModel.swift */,
 			);
 			path = MovieDetail;
 			sourceTree = "<group>";
@@ -182,7 +191,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1BDFBEA25DEE6F300A298C1 /* ViewController.swift in Sources */,
+				B1C9625825E52F4A00C5E02D /* MovieDetailViewController.swift in Sources */,
+				B1C9625925E52F4A00C5E02D /* MovieDetailViewModel.swift in Sources */,
 				B1BDFBE625DEE6F300A298C1 /* AppDelegate.swift in Sources */,
+				B1C9625725E52F4A00C5E02D /* MovieDetailCoordinator.swift in Sources */,
 				B1BDFBE825DEE6F300A298C1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
