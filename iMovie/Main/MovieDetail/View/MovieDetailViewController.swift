@@ -14,9 +14,10 @@ final class MovieDetailViewController: UIViewController {
     init(with viewModel: MovieDetailViewModeling) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        
+        self.viewModel.viewController = self
     }
 
-    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -12,12 +12,13 @@ protocol MovieDetailViewModeling: AnyObject {
 
 final class MovieDetailViewModel {
     weak var viewController: MovieDetailDisplaying?
-
-    init(coordinator: MovieDetailCoordinating) {
-        self.coordinator = coordinator
-    }
-
     private let coordinator: MovieDetailCoordinating
+    private let movie: Movie
+
+    init(coordinator: MovieDetailCoordinating, movie: Movie) {
+        self.coordinator = coordinator
+        self.movie = movie
+    }
 }
 
 extension MovieDetailViewModel: MovieDetailViewModeling { }
