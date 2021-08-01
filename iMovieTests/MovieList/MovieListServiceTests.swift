@@ -18,7 +18,7 @@ final class MovieListServiceTests: XCTestCase {
         var resultReceived: MovieResults?
         
         serviceMock.successModel = iMoviesSeeds.MovieResultsSeed.movieResultFilled()
-        sut.getMovieList { result in
+        sut.getMovieList(page: 0) { result in
             guard case .success(let movieResult) = result else {
                 XCTFail("Expected to complete with success, got failure instead")
                 return
@@ -39,7 +39,7 @@ final class MovieListServiceTests: XCTestCase {
         var receivedError: NetworkError?
 
         serviceMock.errorModel = expectedError
-        sut.getMovieList { result in
+        sut.getMovieList(page: 0) { result in
             guard case .failure(let error) = result else {
                 XCTFail("Expected to complete with error, got success instead")
                 return

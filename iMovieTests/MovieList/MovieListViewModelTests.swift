@@ -44,7 +44,7 @@ final class MovieListServiceMock: MovieListApi {
     var isSuccess = true
     var result = iMoviesSeeds.MovieResultsSeed.movieResultFilled()
     
-    func getMovieList(_ completion: @escaping (Result<MovieResults, NetworkError>) -> Void) {
+    func getMovieList(page: Int, _ completion: @escaping (Result<MovieResults, NetworkError>) -> Void) {
         isSuccess ? completion(.success(result)) : completion(.failure(NetworkError(description: "genericError")))
     }
 }
@@ -92,6 +92,31 @@ final class MovieListViewModelTests: XCTestCase {
         sut.getMovieList()
         
         XCTAssertEqual(viewControllerSpy.showLoadingCallsCount, 2)
+        XCTAssertEqual(viewControllerSpy.fillMovieListCallsCount, 0)
+        XCTAssertEqual(viewControllerSpy.showErrorCallsCount, 1)
+        XCTAssertEqual(viewControllerSpy.errorReceived, errorExpected)
+    }
+    
+    func testLoadMoreMovies_WhenServiceIsSuccessAndListIsNotEmpty_ShouldCallViewControllerWithMovies() {
+        let moviesExpected = iMoviesSeeds.MovieResultsSeed.movieResultFilled()
+        serviceMock.isSuccess = true
+        
+        sut.loadMoreMovies()
+        
+        XCTAssertEqual(viewControllerSpy.showLoadingCallsCount, 1)
+        XCTAssertEqual(viewControllerSpy.fillMovieListCallsCount, 1)
+        XCTAssertEqual(viewControllerSpy.showErrorCallsCount, 0)
+        XCTAssertEqual(viewControllerSpy.moviesReceived?.count, moviesExpected.movies.count)
+        XCTAssertEqual(viewControllerSpy.moviesReceived, moviesExpected.movies)
+    }
+    
+    func testLoadMoreMovies_WhenServiceIsSuccessAndListIsFailure_ShouldCallViewControllerCallingErrorAlert() {
+        let errorExpected = NetworkError(description: "genericError")
+        serviceMock.isSuccess = false
+        
+        sut.loadMoreMovies()
+        
+        XCTAssertEqual(viewControllerSpy.showLoadingCallsCount, 1)
         XCTAssertEqual(viewControllerSpy.fillMovieListCallsCount, 0)
         XCTAssertEqual(viewControllerSpy.showErrorCallsCount, 1)
         XCTAssertEqual(viewControllerSpy.errorReceived, errorExpected)

@@ -18,10 +18,16 @@ protocol MovieListDisplaying: AnyObject {
 final class MovieListViewController: UIViewController {
     
     private let viewModel: MovieListViewModeling
-    
     private var animationView: AnimationView?
+    private var isLoadingList = false
     
-    private var tableView: UITableView = {
+    private lazy var refreshControl: UIRefreshControl = {
+        let refresh = UIRefreshControl()
+        refresh.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
+        return refresh
+    }()
+    
+    private lazy var tableView: UITableView = {
         let table = UITableView()
         table.isHidden = true
         return table
@@ -73,7 +79,6 @@ final class MovieListViewController: UIViewController {
         navigationItem.title = "iMovies"
         navigationController?.navigationBar.barTintColor = UIColor(red: 75/255, green: 0, blue: 130/255, alpha: 1)
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        
     }
     
     private func configureTableView() {
@@ -84,19 +89,26 @@ final class MovieListViewController: UIViewController {
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.addSubview(refreshControl)
     }
 
-    func buildViewHierarchy() {
+    private func buildViewHierarchy() {
         view.addSubview(tableView)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         tableView.constraint {[
             $0.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             $0.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
         ]}
+    }
+    
+    @objc private func refreshTable() {
+        movies.removeAll()
+        viewModel.currentPage = 0
+        viewModel.getMovieList()
     }
 }
 
@@ -126,6 +138,13 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
         viewModel.openMovieDetail(movie: movie)
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (((scrollView.contentOffset.y + scrollView.frame.size.height) > scrollView.contentSize.height) && !isLoadingList){
+            isLoadingList = true
+            viewModel.loadMoreMovies()
+        }
+    }
 }
 
 extension MovieListViewController: MovieListDisplaying {
@@ -147,10 +166,13 @@ extension MovieListViewController: MovieListDisplaying {
             preferredStyle: UIAlertController.Style.alert
         )
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     func fillMovieList(with movies: [Movie]) {
-        self.movies = movies
+        isLoadingList = false
+        refreshControl.endRefreshing()
+        
+        self.movies.append(contentsOf: movies)
     }
 }
