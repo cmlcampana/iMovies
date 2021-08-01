@@ -33,6 +33,12 @@ final class MovieListViewController: UIViewController {
         return table
     }()
     
+//    TODO - List of categories
+//    private var categoryLabel = UITextField()
+//    private var categoriesDropDown = UIPickerView()
+//
+//    var categories = ["Popular", "Now Playing", "Top Rated", "Upcoming"]
+    
     private var movies: [Movie] = [Movie]() {
         didSet {
             tableView.reloadData()
