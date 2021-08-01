@@ -6,9 +6,12 @@
 //
 import UIKit
 
-protocol MovieDetailDisplaying: AnyObject { }
+protocol MovieDetailDisplaying: AnyObject {
+    func fillMovieInfo(_ movie: Movie)
+}
 
 final class MovieDetailViewController: UIViewController {
+    private var movieDetailView = MovieDetailView()
     private let viewModel: MovieDetailViewModeling
 
     init(with viewModel: MovieDetailViewModeling) {
@@ -24,9 +27,15 @@ final class MovieDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.addSubview(movieDetailView)
+        movieDetailView.fillSuperviewToSafeArea()
+        
+        viewModel.loadMovieInfo()
     }
 }
 
-extension MovieDetailViewController: MovieDetailDisplaying { }
+extension MovieDetailViewController: MovieDetailDisplaying {
+    func fillMovieInfo(_ movie: Movie) {
+        movieDetailView.configureView(with: movie)
+    }
+}

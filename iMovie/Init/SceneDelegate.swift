@@ -13,9 +13,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = scene as? UIWindowScene else { return }
-        let movieListViewController = MovieListFactory.make()
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = movieListViewController
+        let navigationController = UINavigationController()
+        let movieListViewController = MovieListFactory.make(navigationController: navigationController)
+        navigationController.viewControllers = [movieListViewController]
+        window.rootViewController = navigationController
         self.window = window
         window.makeKeyAndVisible()
     }

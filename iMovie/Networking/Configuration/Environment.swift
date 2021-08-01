@@ -26,6 +26,14 @@ enum Environment {
     var apiKey: String {
         "365c0b8384162b60d9fb7ebf8dd0ae4c"
     }
+    
+    var posterBaseURL: String {
+        "http://image.tmdb.org/t/p/w342"
+    }
+    
+    var backdropBaseURL: String {
+        "http://image.tmdb.org/t/p/w500"
+    }
 }
 
 enum Language: String, Equatable {

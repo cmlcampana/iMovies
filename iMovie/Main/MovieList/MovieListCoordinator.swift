@@ -13,16 +13,16 @@ protocol MovieListCoordinating: AnyObject {
 }
 
 final class MovieListCoordinator: Coordinator {
-//    private let navigationController: UINavigationController
-//
-//    init(navigationController: UINavigationController) {
-//        self.navigationController = navigationController
-//    }
+    private let navigationController: UINavigationController
+
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
 }
 
 extension MovieListCoordinator: MovieListCoordinating {
     func navigateToDetail(detail: Movie) {
-//        let viewController = MovieDetailFactory.make(navigationController: navigationController, movie: detail)
-//        navigationController.pushViewController(viewController, animated: true)
+        let viewController = MovieDetailFactory.make(navigationController: navigationController, movie: detail)
+        navigationController.pushViewController(viewController, animated: true)
     }
 }

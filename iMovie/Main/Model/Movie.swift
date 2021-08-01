@@ -9,10 +9,10 @@ import Foundation
 
 struct Movie: Decodable {
     let id: Int
-    let posterPath: String
-    let backdrop: String
+    let posterPath: String?
+    let backdrop: String?
     let title: String
-    let releaseDate: String
+    let releaseDate: String?
     let rating: Double
     let overview: String
     
@@ -30,10 +30,10 @@ struct Movie: Decodable {
         let container = try decoder.container(keyedBy: MovieCodingKeys.self)
         
         id = try container.decode(Int.self, forKey: .id)
-        posterPath = try container.decode(String.self, forKey: .posterPath)
-        backdrop = try container.decode(String.self, forKey: .backDrop)
+        posterPath = try? container.decode(String?.self, forKey: .posterPath) ?? ""
+        backdrop = try? container.decode(String?.self, forKey: .backDrop) ?? ""
         title = try container.decode(String.self, forKey: .title)
-        releaseDate = try container.decode(String.self, forKey: .releaseDate)
+        releaseDate = try? container.decode(String?.self, forKey: .releaseDate) ?? ""
         rating = try container.decode(Double.self, forKey: .rating)
         overview = try container.decode(String.self, forKey: .overview)
     }

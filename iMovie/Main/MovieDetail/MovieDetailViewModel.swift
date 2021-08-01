@@ -8,6 +8,8 @@ import Foundation
 
 protocol MovieDetailViewModeling: AnyObject {
     var viewController: MovieDetailDisplaying? { get set }
+    
+    func loadMovieInfo()
  }
 
 final class MovieDetailViewModel {
@@ -21,4 +23,8 @@ final class MovieDetailViewModel {
     }
 }
 
-extension MovieDetailViewModel: MovieDetailViewModeling { }
+extension MovieDetailViewModel: MovieDetailViewModeling {
+    func loadMovieInfo() {
+        viewController?.fillMovieInfo(movie)
+    }
+}
