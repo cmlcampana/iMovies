@@ -10,6 +10,9 @@ Para esse desenvolvimento foi utilizada a arquitetura MVVM-C, seguindo a ideia a
 
 <img src="https://user-images.githubusercontent.com/11183888/127782285-d0c58447-b778-4516-a758-dcd39cc8d4bc.png" width="600"/>
 
+- Todo o desenvolvimento foi guiado com o uso de protocolos para deixar as camadas mais desacopladas e facilitar a implementação de testes unitários;
+- Foi utilizado o pattern de Factory para montagem de cada uma das cenas fazendo a injeção de dependências.
+
 ### API 
 
 - A API utilizada para a busca de filmes foi a [TheMovieDB 🍿](https://developers.themoviedb.org/3)
